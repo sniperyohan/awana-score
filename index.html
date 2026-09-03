@@ -45,9 +45,10 @@ body.soft .btn:hover,body.soft .chips button:hover{background:#e6d6ad}
 body.soft .big{background:#fffdf6}
 body.soft .edit button{border-color:#c08a2a;color:#a8761d}
 body.soft #toast{background:rgba(80,64,32,.9);color:#fff}
-#fw{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
-.cf{position:absolute;width:11px;height:15px;border-radius:2px;animation:fall linear forwards}
-@keyframes fall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(115vh) rotate(720deg);opacity:.15}}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:60}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-9px,4px)}
+  40%{transform:translate(8px,-5px)}60%{transform:translate(-6px,3px)}80%{transform:translate(5px,-2px)}}
+body.shake{animation:shake .5s ease}
 @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.13)}100%{transform:scale(1)}}
 .big.pop{animation:pop .5s ease}
 @keyframes glow{0%,100%{box-shadow:0 0 26px rgba(255,201,60,.55)}50%{box-shadow:0 0 46px rgba(255,201,60,.9)}}
@@ -83,7 +84,7 @@ body.soft #toast{background:rgba(80,64,32,.9);color:#fff}
 </div>
 
 <div id="toast"></div>
-<div id="fw"></div>
+<canvas id="fx"></canvas>
 
 <script>
 const PAL=["#ff5252","#3d8bff","#ffc93c","#31c46b","#b06bff","#ff7ab8"];
@@ -104,23 +105,26 @@ function beep(f=880,d=.1,t='triangle',v=.13){
 function toast(m){const t=document.getElementById('toast');t.textContent=m;
   t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),1400)}
 
-function fireworks(n){
-  const box=document.getElementById('fw');
-  const cols=['#ff5252','#3d8bff','#ffc93c','#31c46b','#b06bff','#ff7ab8'];
-  for(let i=0;i<n;i++){
-    const d=document.createElement('div');
-    d.className='cf';
-    d.style.left=(Math.random()*100)+'vw';
-    d.style.top=(-10-Math.random()*25)+'vh';
-    d.style.background=cols[i%cols.length];
-    d.style.animationDuration=(1.6+Math.random()*1.5)+'s';
-    box.appendChild(d);
-    setTimeout(()=>d.remove(),3400);
-  }
+/* 폭죽 (미션보드와 동일) */
+const fx=document.getElementById('fx'),fc=fx.getContext('2d');
+let parts=[];
+function fitFx(){fx.width=innerWidth;fx.height=innerHeight}
+fitFx();addEventListener('resize',fitFx);
+function burst(x,y,n=90,cols=['#ffd66b','#ff6b9d','#6bffb0','#6ba8ff','#fff']){
+  for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=3+Math.random()*9;
+   parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-4,g:.32,
+    w:5+Math.random()*7,h:8+Math.random()*9,r:Math.random()*6,vr:(Math.random()-.5)*.4,
+    c:cols[i%cols.length],life:70+Math.random()*40});}
 }
-function fanfare(){
-  [523,659,784,1046].forEach((f,i)=>setTimeout(()=>beep(f,.3,'triangle',.16),i*110));
-}
+(function loop(){fc.clearRect(0,0,fx.width,fx.height);
+  parts=parts.filter(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life--;
+   fc.save();fc.translate(p.x,p.y);fc.rotate(p.r);fc.fillStyle=p.c;
+   fc.globalAlpha=Math.max(0,Math.min(1,p.life/40));
+   fc.fillRect(-p.w/2,-p.h/2,p.w,p.h);fc.restore();return p.life>0&&p.y<fx.height+40});
+  requestAnimationFrame(loop);})();
+function shake(){document.body.classList.remove('shake');void document.body.offsetWidth;
+  document.body.classList.add('shake');}
+function fanfare(){[523,659,784,1046].forEach((f,i)=>setTimeout(()=>beep(f,.35,'triangle',.2),i*135));}
 
 /* 설정 화면 */
 const sel=document.getElementById('cnt');
@@ -188,10 +192,14 @@ function add(i,pt){
     countUp(cards[i].querySelector('.bs'),from,teams[i].score);
     cards[i].classList.add('pop');
   }
-  if(pt>=300){fireworks(pt>=1000?150:80);fanfare()}
-  else if(pt>0)beep(1046,.14,'triangle',.14);
+  if(pt>0&&cards[i]){
+    const r=cards[i].getBoundingClientRect();
+    burst(r.left+r.width/2,r.top+r.height/2,pt>=500?110:45,[teams[i].color,'#ffd66b','#fff']);
+  }
+  if(pt>=500){fanfare();shake()}
+  else if(pt>0)beep(880,.18,'triangle',.16);
   else beep(392,.18,'sine',.13);
-  setTimeout(build,pt>=300?1200:700);
+  setTimeout(build,pt>=500?1100:700);
 }
 function undo(){
   if(!hist.length){toast('되돌릴 게 없어요');return}
