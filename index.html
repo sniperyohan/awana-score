@@ -78,39 +78,57 @@ body.shake{animation:shake .5s ease}
 .big.pop{animation:pop .45s ease}
 @keyframes glow{0%,100%{box-shadow:0 0 34px rgba(255,214,107,.6)}50%{box-shadow:0 0 52px rgba(255,214,107,.95)}}
 .big.lead{animation:glow 1.8s ease-in-out infinite}
-/* ===== 미션보드 원본 수치 그대로 이식 (맨 마지막) ===== */
+/* ===== 미션보드 .bigscore 실제 적용값 이식 (맨 마지막) ===== */
 html,body{height:auto}
 body{
   margin:0; min-height:100vh;
   display:flex; flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:18px; box-sizing:border-box;
+  justify-content:center; align-items:center;
+  padding:0; box-sizing:border-box;
 }
-h1{ font-size:clamp(30px,4vw,58px); margin:0 0 18px; }
+h1{ font-size:clamp(36px,4.2vw,64px); margin:0 0 30px; }
 #game{
   display:flex!important; flex-direction:column;
-  align-items:center; width:100%;
-  min-height:0!important; height:auto!important;
+  justify-content:center; align-items:center;
+  width:100%; min-height:0!important; height:auto!important;
 }
 #bigWrap{
-  display:flex!important; gap:18px; flex-wrap:nowrap;
-  justify-content:center; width:100%; max-width:1560px; margin:0 auto;
+  display:flex!important; flex-wrap:wrap; gap:0;
+  justify-content:center; align-items:center;
+  width:100%; max-width:100%;
 }
 .big{
-  display:block; flex:1 1 0;
-  min-width:0; max-width:none;
-  padding:20px 18px;
+  display:block; flex:0 0 auto;
+  margin:0 18px;
+  padding:44px 60px;
+  border-width:6px; border-radius:32px;
+  min-width:clamp(280px,26vw,420px); max-width:none;
 }
-.bn{ font-size:clamp(18px,2.2vw,29px); font-weight:900; margin-bottom:2px; }
-.bs{ font-size:clamp(50px,7.5vw,105px); font-weight:900; line-height:1; margin:0; }
+.bn{ font-size:clamp(30px,3.2vw,52px); font-weight:900; margin:0; }
+.bs{ font-size:clamp(120px,16vw,260px); font-weight:900; line-height:1; margin:10px 0 22px; }
 .chips{
-  display:grid!important; grid-template-columns:repeat(3,1fr);
-  gap:8px; justify-content:center; margin-top:14px;
+  display:flex!important; flex-wrap:wrap; gap:6px;
+  justify-content:center; margin:0;
 }
-.chips button{ padding:12px 6px; font-size:clamp(14px,1.1vw,20px); font-weight:800; border-radius:10px; }
-.edit{ margin-top:8px; }
-#tools{ margin:14px 0 0; }
+.chips button{ font-size:clamp(14px,1.3vw,20px); padding:10px 16px; border-radius:10px; font-weight:800; }
+.edit{ margin-top:10px; }
+.edit button{ font-size:clamp(14px,1.3vw,20px); padding:10px 16px; }
+#tools{ margin:26px 0 0; }
+/* 5~6팀은 원본과 동일하게 3열 축소 */
+#bigWrap[data-n="5"],#bigWrap[data-n="6"]{
+  display:grid!important; grid-template-columns:repeat(3,1fr);
+  gap:8px!important; width:min(96vw,1180px);
+}
+#bigWrap[data-n="5"] .big,#bigWrap[data-n="6"] .big{
+  margin:0!important; padding:6px 8px!important; min-width:0!important;
+}
+#bigWrap[data-n="5"] .bs,#bigWrap[data-n="6"] .bs{
+  font-size:clamp(26px,4.2vh,46px)!important; line-height:1.05!important; margin:4px 0 8px!important;
+}
+#bigWrap[data-n="5"] .bn,#bigWrap[data-n="6"] .bn{ font-size:clamp(14px,2vh,20px)!important; }
+#bigWrap[data-n="5"] .chips button,#bigWrap[data-n="6"] .chips button{
+  font-size:11px!important; padding:4px 7px!important;
+}
 
 </style></head><body>
 
