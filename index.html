@@ -45,6 +45,13 @@ body.soft .btn:hover,body.soft .chips button:hover{background:#e6d6ad}
 body.soft .big{background:#fffdf6}
 body.soft .edit button{border-color:#c08a2a;color:#a8761d}
 body.soft #toast{background:rgba(80,64,32,.9);color:#fff}
+#fw{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
+.cf{position:absolute;width:11px;height:15px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(115vh) rotate(720deg);opacity:.15}}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.13)}100%{transform:scale(1)}}
+.big.pop{animation:pop .5s ease}
+@keyframes glow{0%,100%{box-shadow:0 0 26px rgba(255,201,60,.55)}50%{box-shadow:0 0 46px rgba(255,201,60,.9)}}
+.big.lead{animation:glow 1.8s ease-in-out infinite}
 </style></head><body>
 
 <div id="lock" style="position:fixed;inset:0;z-index:99;display:flex;
@@ -76,6 +83,7 @@ body.soft #toast{background:rgba(80,64,32,.9);color:#fff}
 </div>
 
 <div id="toast"></div>
+<div id="fw"></div>
 
 <script>
 const PAL=["#ff5252","#3d8bff","#ffc93c","#31c46b","#b06bff","#ff7ab8"];
@@ -95,6 +103,24 @@ function beep(f=880,d=.1,t='triangle',v=.13){
 }
 function toast(m){const t=document.getElementById('toast');t.textContent=m;
   t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),1400)}
+
+function fireworks(n){
+  const box=document.getElementById('fw');
+  const cols=['#ff5252','#3d8bff','#ffc93c','#31c46b','#b06bff','#ff7ab8'];
+  for(let i=0;i<n;i++){
+    const d=document.createElement('div');
+    d.className='cf';
+    d.style.left=(Math.random()*100)+'vw';
+    d.style.top=(-10-Math.random()*25)+'vh';
+    d.style.background=cols[i%cols.length];
+    d.style.animationDuration=(1.6+Math.random()*1.5)+'s';
+    box.appendChild(d);
+    setTimeout(()=>d.remove(),3400);
+  }
+}
+function fanfare(){
+  [523,659,784,1046].forEach((f,i)=>setTimeout(()=>beep(f,.3,'triangle',.16),i*110));
+}
 
 /* 설정 화면 */
 const sel=document.getElementById('cnt');
@@ -158,9 +184,14 @@ function add(i,pt){
   const from=teams[i].score;
   hist.push({i,pt});teams[i].score+=pt;save();
   const cards=document.querySelectorAll('.big');
-  if(cards[i])countUp(cards[i].querySelector('.bs'),from,teams[i].score);
-  beep(pt>0?1046:392,.14,'triangle',.14);
-  setTimeout(build,620);
+  if(cards[i]){
+    countUp(cards[i].querySelector('.bs'),from,teams[i].score);
+    cards[i].classList.add('pop');
+  }
+  if(pt>=300){fireworks(pt>=1000?150:80);fanfare()}
+  else if(pt>0)beep(1046,.14,'triangle',.14);
+  else beep(392,.18,'sine',.13);
+  setTimeout(build,pt>=300?1200:700);
 }
 function undo(){
   if(!hist.length){toast('되돌릴 게 없어요');return}
