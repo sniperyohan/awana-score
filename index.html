@@ -47,6 +47,17 @@ body.soft .edit button{border-color:#c08a2a;color:#a8761d}
 body.soft #toast{background:rgba(80,64,32,.9);color:#fff}
 </style></head><body>
 
+<div id="lock" style="position:fixed;inset:0;z-index:99;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:#fdf6e6">
+  <div style="font-size:26px;font-weight:900;color:#7a5a12">🏆 어와나 점수판</div>
+  <input id="pw" type="password" placeholder="비밀번호" autocomplete="off"
+    style="width:220px;text-align:center;font-size:18px;padding:12px;
+    border-radius:12px;border:1px solid #e0d3b0;background:#fffdf6;color:#3b3226">
+  <button class="btn" onclick="unlock()">들어가기</button>
+  <div id="pwMsg" style="color:#c04a4a;font-weight:800;font-size:14px;height:18px"></div>
+</div>
+
 <h1>🏆 어와나 점수판</h1>
 
 <div id="setup">
@@ -196,6 +207,23 @@ if(load()){
   document.getElementById('game').style.display='block';
   build();
 }
+
+/* 간단 잠금 */
+const PW='awana2026';
+function unlock(){
+  const v=document.getElementById('pw').value;
+  if(v===PW){
+    document.getElementById('lock').style.display='none';
+    sessionStorage.setItem('sb_ok','1');beep(880,.1);
+  }else{
+    document.getElementById('pwMsg').textContent='비밀번호가 달라요';
+    document.getElementById('pw').value='';
+  }
+}
+if(sessionStorage.getItem('sb_ok'))document.getElementById('lock').style.display='none';
+document.getElementById('pw').addEventListener('keydown',e=>{
+  if(e.key==='Enter')unlock();
+});
 
 addEventListener('keydown',e=>{
   if(e.key==='z'||e.key==='Z')undo();
