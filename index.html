@@ -6,7 +6,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:system-ui,"Malgun Gothic",sans-serif;
   background:#030616;color:#fff;min-height:100vh;padding:16px;transition:.25s}
-h1{text-align:center;font-size:clamp(22px,3.4vw,42px);margin:6px 0 14px;
+h1{text-align:center;font-size:clamp(28px,4.2vw,54px);margin:8px 0 18px;
   text-shadow:0 0 20px #6ea8ff}
 #setup{width:min(560px,92vw);margin:0 auto}
 #setup p.sub{color:#9fc4ff;margin:0 0 16px;font-size:15px;text-align:center}
@@ -29,13 +29,13 @@ body.soft .srow .sw{border-color:#e0d3b0}
 #bigWrap{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;width:100%;
   max-width:100%;max-height:100%}
 .big{background:rgba(255,255,255,.07);border:3px solid;border-radius:22px;
-  padding:14px 16px;text-align:center;min-width:225px;flex:1;max-width:325px;
+  padding:26px 20px;text-align:center;min-width:230px;flex:1;max-width:340px;
   position:relative}
-.bn{font-size:clamp(18px,2.2vw,29px);font-weight:900;margin-bottom:2px}
-.bs{font-size:clamp(50px,7.5vw,105px);font-weight:900;line-height:1;color:#ffd66b;
-  text-shadow:0 0 26px rgba(255,190,60,.75)}
-.chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px}
-.chips button{border:none;border-radius:10px;padding:6px 9px;font-size:12px;font-weight:800;
+.bn{font-size:clamp(22px,2.6vw,34px);font-weight:900;margin-bottom:6px}
+.bs{font-size:clamp(64px,9vw,132px);font-weight:900;line-height:1;color:#ffd66b;
+  text-shadow:0 0 26px rgba(255,190,60,.75);margin:10px 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.chips button{border:none;border-radius:12px;padding:10px 14px;font-size:16px;font-weight:800;
   cursor:pointer;background:rgba(255,255,255,.16);color:#fff;transition:.15s}
 .chips button:hover{background:#5f7ffb;transform:translateY(-2px)}
 #bigWrap[data-n="5"],#bigWrap[data-n="6"]{
@@ -50,8 +50,9 @@ body.soft .srow .sw{border-color:#e0d3b0}
   font-size:11px;padding:4px 7px}
 .edit{display:flex;gap:6px;justify-content:center;margin-top:8px}
 .edit button{border:1px dashed rgba(255,201,60,.7);background:transparent;color:#ffc93c;
-  border-radius:999px;padding:6px 14px;font-size:13px;font-weight:800;cursor:pointer}
-#tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px 0 8px}
+  border-radius:999px;padding:8px 18px;font-size:15px;font-weight:800;cursor:pointer}
+#tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:28px 0 8px}
+#game{min-height:calc(100vh - 110px);display:flex;flex-direction:column;justify-content:center}
 #toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);padding:12px 22px;
   border-radius:14px;background:rgba(0,0,0,.8);font-size:17px;font-weight:800;
   opacity:0;pointer-events:none;transition:.25s}
