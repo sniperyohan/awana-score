@@ -78,44 +78,39 @@ body.shake{animation:shake .5s ease}
 .big.pop{animation:pop .45s ease}
 @keyframes glow{0%,100%{box-shadow:0 0 34px rgba(255,214,107,.6)}50%{box-shadow:0 0 52px rgba(255,214,107,.95)}}
 .big.lead{animation:glow 1.8s ease-in-out infinite}
-/* ===== 최종 레이아웃 보정 v2 (반드시 맨 마지막) ===== */
-html,body{height:100%}
+/* ===== 미션보드 원본 수치 그대로 이식 (맨 마지막) ===== */
+html,body{height:auto}
 body{
-  min-height:100dvh; margin:0;
+  margin:0; min-height:100vh;
   display:flex; flex-direction:column;
-  justify-content:center; align-items:center;
-  gap:1vh; padding:2vh 2vw; box-sizing:border-box;
+  align-items:center;
+  justify-content:flex-start;
+  padding:18px; box-sizing:border-box;
 }
-h1{ margin:0 0 1vh; font-size:clamp(36px,4.6vw,62px); line-height:1.1; }
+h1{ font-size:clamp(22px,3.4vw,44px); margin:0 0 10px; }
 #game{
   display:flex!important; flex-direction:column;
-  align-items:center; justify-content:center;
-  gap:1.6vh; width:100%; flex:0 0 auto;
+  align-items:center; width:100%;
   min-height:0!important; height:auto!important;
 }
 #bigWrap{
-  display:flex!important; flex-wrap:nowrap;
-  justify-content:center; align-items:stretch;
-  gap:1.2vw; width:100%; flex:0 0 auto; max-height:none;
+  display:flex!important; gap:14px; flex-wrap:wrap;
+  justify-content:center; width:100%; max-width:100%;
 }
 .big{
-  display:block; flex:1 1 0;
-  min-width:0; max-width:300px;
-  padding:1.6vh 1vw;
+  display:block; flex:1;
+  min-width:225px; max-width:325px;
+  padding:14px 16px;
 }
-#bigWrap{ max-width:1180px!important; margin:0 auto; }
-.bn{ font-size:clamp(22px,2.1vw,38px); margin-bottom:0.2vh; }
-.bs{ font-size:clamp(80px,7.2vw,190px); line-height:1; margin:0.4vh 0 1.2vh; }
+.bn{ font-size:clamp(18px,2.2vw,29px); font-weight:900; margin-bottom:2px; }
+.bs{ font-size:clamp(50px,7.5vw,105px); font-weight:900; line-height:1; margin:0; }
 .chips{
-  display:grid!important; grid-template-columns:repeat(3,1fr);
-  gap:6px; margin-top:0.8vh;
+  display:flex!important; flex-wrap:wrap; gap:5px;
+  justify-content:center; margin-top:10px;
 }
-.chips button{ font-size:clamp(12px,1.6vh,18px); padding:1vh 4px; }
-.edit{ margin-top:0.8vh; }
-.edit button{ padding:0.9vh 14px; font-size:clamp(12px,1.5vh,16px); }
-#tools{ margin:1vh 0 0; }
-/* 5~6팀은 3열 그리드 유지 */
-#bigWrap[data-n="5"],#bigWrap[data-n="6"]{ display:grid!important; }
+.chips button{ padding:6px 9px; font-size:12px; font-weight:800; border-radius:10px; }
+.edit{ margin-top:8px; }
+#tools{ margin:14px 0 0; }
 
 </style></head><body>
 
