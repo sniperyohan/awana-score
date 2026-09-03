@@ -90,19 +90,20 @@ h1{ margin:0 0 0.5vh; font-size:clamp(38px,6.4vh,76px); line-height:1.1; }
 #game{
   display:flex!important; flex-direction:column;
   align-items:center; justify-content:center;
-  gap:1.4vh; width:100%; min-height:0;
+  gap:1.4vh; width:100%; flex:1 1 auto; min-height:0;
 }
 #bigWrap{
-  display:flex!important; flex-wrap:wrap;
+  display:flex!important; flex-wrap:nowrap;
   justify-content:center; align-items:stretch;
-  gap:1.4vw; width:100%; max-height:none;
+  gap:1.2vw; width:100%; flex:1 1 auto; max-height:none;
 }
 .big{
-  flex:1 1 0; min-width:250px; max-width:400px;
-  padding:2.4vh 1.4vw;
+  display:flex; flex-direction:column; justify-content:center;
+  flex:1 1 0; min-width:0; max-width:none;
+  padding:2.4vh 1.2vw;
 }
-.bn{ font-size:clamp(22px,3vh,38px); margin-bottom:0.4vh; }
-.bs{ font-size:clamp(80px,16.5vh,210px); line-height:1; margin:0.6vh 0 1.6vh; }
+.bn{ font-size:clamp(24px,2.4vw,44px); margin-bottom:0.4vh; }
+.bs{ font-size:clamp(90px,9vw,260px); line-height:1; margin:0.6vh 0 1.6vh; }
 .chips{
   display:grid!important; grid-template-columns:repeat(3,1fr);
   gap:6px; margin-top:0.8vh;
