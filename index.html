@@ -221,12 +221,12 @@ function add(i,pt){
   }
   if(pt>0&&cards[i]){
     const r=cards[i].getBoundingClientRect();
-    burst(r.left+r.width/2,r.top+r.height/2,pt>=300?110:45,[teams[i].color,'#ffd66b','#fff']);
+    burst(r.left+r.width/2,r.top+r.height/2,110,[teams[i].color,'#ffd66b','#fff']);
+    fanfare();shake();
+  }else{
+    beep(392,.18,'sine',.13);
   }
-  if(pt>=300){fanfare();shake()}
-  else if(pt>0)beep(880,.18,'triangle',.16);
-  else beep(392,.18,'sine',.13);
-  setTimeout(build,pt>=300?1100:700);
+  setTimeout(build,pt>0?1100:700);
 }
 function undo(){
   if(!hist.length){toast('되돌릴 게 없어요');return}
