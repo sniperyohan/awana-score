@@ -78,33 +78,41 @@ body.shake{animation:shake .5s ease}
 .big.pop{animation:pop .45s ease}
 @keyframes glow{0%,100%{box-shadow:0 0 34px rgba(255,214,107,.6)}50%{box-shadow:0 0 52px rgba(255,214,107,.95)}}
 .big.lead{animation:glow 1.8s ease-in-out infinite}
-/* ===== 최종 레이아웃 보정 (맨 마지막에 위치해야 함) ===== */
+/* ===== 최종 레이아웃 보정 v2 (반드시 맨 마지막) ===== */
 html,body{height:100%}
 body{
   min-height:100dvh; margin:0;
   display:flex; flex-direction:column;
-  justify-content:center;   /* 위아래 중앙 */
-  align-items:center;       /* 좌우 중앙 */
-  gap:2.5vh; padding:2vh 2vw; box-sizing:border-box;
+  justify-content:center; align-items:center;
+  gap:1vh; padding:2vh 2vw; box-sizing:border-box;
 }
-h1{ margin:0; font-size:clamp(30px,4.4vh,58px); }
+h1{ margin:0 0 0.5vh; font-size:clamp(38px,6.4vh,76px); line-height:1.1; }
 #game{
   display:flex!important; flex-direction:column;
   align-items:center; justify-content:center;
-  gap:2.5vh; width:100%;
+  gap:1.4vh; width:100%; min-height:0;
 }
 #bigWrap{
   display:flex!important; flex-wrap:wrap;
   justify-content:center; align-items:stretch;
-  gap:1.6vw; width:100%;
+  gap:1.4vw; width:100%; max-height:none;
 }
 .big{
-  flex:1 1 0; min-width:270px; max-width:430px;
-  padding:2.2vh 1.4vw;
+  flex:1 1 0; min-width:250px; max-width:400px;
+  padding:2.4vh 1.4vw;
 }
-.bn{ font-size:clamp(22px,2.4vh+0.6vw,36px); }
-.bs{ font-size:clamp(70px,13vh,170px); line-height:1; margin:0.4vh 0 1.2vh; }
-#tools{ margin:0; }
+.bn{ font-size:clamp(22px,3vh,38px); margin-bottom:0.4vh; }
+.bs{ font-size:clamp(80px,16.5vh,210px); line-height:1; margin:0.6vh 0 1.6vh; }
+.chips{
+  display:grid!important; grid-template-columns:repeat(3,1fr);
+  gap:6px; margin-top:0.8vh;
+}
+.chips button{ font-size:clamp(12px,1.6vh,18px); padding:1vh 4px; }
+.edit{ margin-top:0.8vh; }
+.edit button{ padding:0.9vh 14px; font-size:clamp(12px,1.5vh,16px); }
+#tools{ margin:1vh 0 0; }
+/* 5~6팀은 3열 그리드 유지 */
+#bigWrap[data-n="5"],#bigWrap[data-n="6"]{ display:grid!important; }
 
 </style></head><body>
 
