@@ -100,9 +100,8 @@ body.shake{animation:shake .5s ease}
 <script>
 const PAL=["#ff5252","#3d8bff","#ffc93c","#31c46b","#b06bff","#ff7ab8"];
 const EMO=['🚀','🦁','🐧','🐯','🦊','🐻'];
-const BTNS=[{label:"🏆 1000",pt:1000},{label:"🥈 500",pt:500},{label:"🥉 300",pt:300},
-  {label:"📣 응원왕 200",pt:200},{label:"🙌 발표 100",pt:100},{label:"🧹 질서 100",pt:100},
-  {label:"＋10",pt:10},{label:"－10",pt:-10}];
+const BTNS=[{label:"50",pt:50},{label:"100",pt:100},{label:"200",pt:200},
+  {label:"300",pt:300},{label:"400",pt:400},{label:"－50",pt:-50}];
 let teams=[],hist=[];
 
 /* 소리 */
@@ -222,12 +221,12 @@ function add(i,pt){
   }
   if(pt>0&&cards[i]){
     const r=cards[i].getBoundingClientRect();
-    burst(r.left+r.width/2,r.top+r.height/2,pt>=500?110:45,[teams[i].color,'#ffd66b','#fff']);
+    burst(r.left+r.width/2,r.top+r.height/2,pt>=300?110:45,[teams[i].color,'#ffd66b','#fff']);
   }
-  if(pt>=500){fanfare();shake()}
+  if(pt>=300){fanfare();shake()}
   else if(pt>0)beep(880,.18,'triangle',.16);
   else beep(392,.18,'sine',.13);
-  setTimeout(build,pt>=500?1100:700);
+  setTimeout(build,pt>=300?1100:700);
 }
 function undo(){
   if(!hist.length){toast('되돌릴 게 없어요');return}
