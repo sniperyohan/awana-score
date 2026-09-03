@@ -236,7 +236,7 @@ function setTheme(soft){
   localStorage.setItem('sb_theme',soft?'soft':'dark');
 }
 function toggleTheme(){setTheme(!document.body.classList.contains('soft'))}
-setTheme(localStorage.getItem('sb_theme')!=='dark');
+setTheme(localStorage.getItem('sb_theme')==='soft');
 
 /* 새로고침해도 유지 */
 if(load()){
